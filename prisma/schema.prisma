@@ -1,39 +1,39 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+    provider = "prisma-client"
+    output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+    provider = "postgresql"
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  status    Boolean  @default(true)
-  funcao    Funcao   @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  nome      String
-  email     String   @unique
-  posts     Post[]
+    id        Int      @id @default(autoincrement())
+    nome      String
+    email     String   @unique
+    status    Boolean  @default(true)
+    funcao    Funcao   @default(USER)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
+    posts     Post[]
 
-  @@map("users")
+    @@map("users")
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAd DateTime @default(now()) @updatedAt
-  titulo    String
-  subtitulo String?
-  conteudo  String
-  userId    Int
-  autor     User     @relation(fields: [userId], references: [id])
+    titulo    String
+    subtitulo String?
+    conteudo  String
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAd DateTime @default(now()) @updatedAt
+    userId    Int
+    autor     User     @relation(fields: [userId], references: [id])
 
-  @@map("posts")
+    @@map("posts")
 }
 
 enum Funcao {
-  ADMIN
-  USER
+    ADMIN
+    USER
 }
