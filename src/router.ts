@@ -34,36 +34,6 @@ router.post('/users', async (req, res) => {
     }
 })
 
-// Rota para ATUALIZAÇÃO DE UM OU MAIS CADASTROS
-router.put('/user', async (req, res) => {
-    const result = await updateUser();
-    res.json({ result });
-})
-
-// Rota para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (exibindo todos os campos)
-router.get('/users', async (req, res) => {
-    const result = await findAllUsers();
-    res.json({ result });
-})
-
-// Rota para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (exibindo apenas determinados campos)
-router.get('/users-details', async (req, res) => {
-    const result = await findAllUsersDetails();
-    res.json({ result })
-})
-
-// Rota para CONSULTA DE UM DETERMINADO USUÁRIO (a partir do ID) ---- WHERE definindo a Condição da consulta
-router.get('/userId', async (req, res) => {
-    const result = await findUserByiD()
-    res.json({ result })
-})
-
-// Rota para CONSULTA DE USUÁRIOS QUE TENHAM UM DETERMINADO "TERMO" EM SEU EMAIL
-router.get('/userEmail', async (req, res) => {
-    const result = await find_partEmail();
-    res.json({ result });
-})
-
 // Rota para CRIAÇÃO DE USUÁRIO COM POST --- criação simultânea de registros relacionados
 router.post('/user-post', async (req, res) => {
     const result = await createUserPost({
@@ -79,5 +49,47 @@ router.post('/user-post', async (req, res) => {
     })
     return res.json({ result })
 })
+
+
+
+
+// Rota para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (exibindo todos os campos)
+router.get('/users', async (req, res) => {
+    const result = await findAllUsers();
+    res.json({ result });
+})
+
+// Rota para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (exibindo apenas determinados campos)
+router.get('/users-details', async (req, res) => {
+    const result = await findAllUsersDetails();
+    res.json({ result })
+})
+
+
+// Rota para CONSULTA DE UM DETERMINADO USUÁRIO (a partir do ID) ---- WHERE definindo a Condição da consulta
+router.get('/userId', async (req, res) => {
+    const result = await findUserByiD()
+    res.json({ result })
+})
+
+// Rota para CONSULTA DE USUÁRIOS QUE TENHAM UM DETERMINADO "TERMO" EM SEU EMAIL
+router.get('/userEmail', async (req, res) => {
+    const result = await find_partEmail();
+    res.json({ result });
+})
+
+
+
+// Rota para CONSULTA DE USUÁRIOS A PARTIR DE UM ATRIBUTO RELACIONADO
+
+
+
+
+// Rota para ATUALIZAÇÃO DE UM OU MAIS CADASTROS
+router.put('/user', async (req, res) => {
+    const result = await updateUser();
+    res.json({ result });
+})
+
 
 export default router;

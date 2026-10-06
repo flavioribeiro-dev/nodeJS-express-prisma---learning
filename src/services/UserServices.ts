@@ -2,27 +2,17 @@ import type { Prisma } from "../../generated/prisma/browser.js"
 import { prisma } from "../libs/prisma.js"
 
 // Método para CRIAÇÃO DE UM NOVO REGISTRO ÚNICO (simples)
-export const createUser = async (data : Prisma.UserCreateInput) => {
+export const createUser = async (data: Prisma.UserCreateInput) => {
     const user = await prisma.user.create({
         data: data
     })
     return user;
 }
 
-// Método para ATUALIZAÇÃO DE UM OU MAIS CADASTROS
-export const updateUser = async () => {
-    const updateUsers = await prisma.user.updateMany({
-        data: {
-            status: true
-        }
-    })
-    return updateUsers;
-}
-
 // Método para CRIAÇÃO DE VÁRIOS REGISTROS SIMULTÂNEOS
-export const createUsers = async (data: Prisma.UserCreateInput[]) => {
+export const createUsers = async (users: Prisma.UserCreateInput[]) => {
     return await prisma.user.createMany({
-        data: data,
+        data: users,
         skipDuplicates: true
     }
 )}
@@ -31,6 +21,8 @@ export const createUsers = async (data: Prisma.UserCreateInput[]) => {
 export const createUserPost = async (data: Prisma.UserCreateInput) => {
     return await prisma.user.create({ data })
 }
+
+
 
 // Método para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS
 export const findAllUsers = async () => {
@@ -42,28 +34,9 @@ export const findAllUsers = async () => {
             status: true
         }
     });
-
-    // let page = 0;
-    // let perPage = 2;
-    
-    // return await prisma.user.findMany({
-    //     // skip: page * perPage,
-    //     // take: perPage,
-    //     select: {
-    //         id: true,
-    //         nome: true,
-    //         funcao: true,
-    //         _count: {
-    //             select: {
-    //                 posts: true
-    //             }
-    //         }
-    //     },
-    // });
-
 }
 
-// Método para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (nome, email, função)
+// Método para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS --- exibindo apenas alguns dados (nome, email, função) --- com SELECT
 export const findAllUsersDetails = async () => {
     const users = prisma.user.findMany({
         select: {
@@ -74,6 +47,9 @@ export const findAllUsersDetails = async () => {
     })
     return { users }
 }
+
+
+
 
 // Método para CONSULTA DE UM DETERMINADO USUÁRIO (a partir do ID) ---- WHERE definindo a Condição da consulta
 export const findUserByiD = async () => {
@@ -100,4 +76,14 @@ export const find_partEmail = async () => {
         }
     })
     return users;
+}
+
+// Método para ATUALIZAÇÃO DE UM OU MAIS CADASTROS
+export const updateUser = async () => {
+    const updateUsers = await prisma.user.updateMany({
+        data: {
+            status: true
+        }
+    })
+    return updateUsers;
 }
