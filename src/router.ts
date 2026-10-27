@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, createUserPost, createUsers, find_partEmail, findAllUsers, findAllUsersDetails, findUserByiD, updateUser } from "./services/UserServices.js";
+import { createUser, createUserPost, createUsers, find_partEmail, findAllUsers, findAllUsersDetails, findAllUsersNameOrdered, findUserByiD, updateUser } from "./services/UserServices.js";
 
 const router = Router();
 
@@ -50,9 +50,6 @@ router.post('/user-post', async (req, res) => {
     return res.json({ result })
 })
 
-
-
-
 // Rota para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (exibindo todos os campos)
 router.get('/users', async (req, res) => {
     const result = await findAllUsers();
@@ -62,6 +59,12 @@ router.get('/users', async (req, res) => {
 // Rota para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS (exibindo apenas determinados campos)
 router.get('/users-details', async (req, res) => {
     const result = await findAllUsersDetails();
+    res.json({ result })
+})
+
+// Rota para CONSULTA DE TODOS OS USUÁRIOS (ORDENAÇÃO CRESCENTE PELO NOME)
+router.get('/users_nameOrderedAsc', async (req, res) => {
+    const result = findAllUsersNameOrdered();
     res.json({ result })
 })
 

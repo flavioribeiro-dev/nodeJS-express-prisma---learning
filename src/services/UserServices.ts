@@ -24,6 +24,7 @@ export const createUserPost = async (data: Prisma.UserCreateInput) => {
 
 
 
+
 // Método para CONSULTA DE TODOS OS USUÁRIOS CADASTRADOS
 export const findAllUsers = async () => {
     return await prisma.user.findMany({
@@ -46,6 +47,36 @@ export const findAllUsersDetails = async () => {
         }
     })
     return { users }
+}
+
+// Rota para CONSULTA DE TODOS OS USUÁRIOS (COM ORDENAÇÃO)
+export const findAllUsersNameOrdered = async () => {
+    return await prisma.user.findMany({
+        select: {
+            id: true,
+            nome: true,
+            email: true
+        },
+        orderBy: {
+            nome: "asc"
+        }
+    })
+}
+
+// Método para a CONSULTA DE REGISTROS COM A CONTAGEM DE OUTROS REGISTROS RELACIONADOS (quantidade de Post de um Usuário, por exemplo)
+export const findUserPosts = async () => {
+    return await prisma.user.findMany({
+        select: {
+            id: true,
+            nome: true,
+            email: true,
+            _count: {
+                select: {
+                    posts: true
+                }
+            }
+        }
+    })
 }
 
 
