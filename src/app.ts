@@ -14,12 +14,7 @@ server.use(Express.json());
 server.use(Express.urlencoded({ extended: true }));
 server.use(Express.static(path.join(__dirname, '../public')));
 
-// server.use(Express.public())
-
-
 server.use(router);
-
-
 
 server.listen(process.env.PORT, () => {
     console.log(`Servidor rodando na porta ${process.env.PORT}`)

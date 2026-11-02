@@ -1,13 +1,10 @@
 import { Router } from "express";
+import produtosRouter from "./routes/produtosRouter";
+import voosRouter from "./routes/voosRouter";
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.send('página inicial 321');
-})
-
-
-
-
+router.use('/produtos', produtosRouter)
+router.use('/voos', voosRouter)
 
 export default router;
