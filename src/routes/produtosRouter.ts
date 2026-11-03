@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { RequestHandler, Router } from "express";
 
 const router = Router();
 
@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const id = req.params.id;
-    res.json({ 
+    res.status(200).json({ 
         produto: {
             id: id,
             nome: "Teclado XYZ" ,
